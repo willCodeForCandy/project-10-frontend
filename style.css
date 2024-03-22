@@ -43,5 +43,5 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  gap: var(--rc-gap-lg);
+  gap: var(--spacing-l);
 }
