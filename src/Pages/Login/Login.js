@@ -1,5 +1,7 @@
+import { vercelUrl } from '../../../main';
 import { Header } from '../../Components/HeaderNav/HeaderNav';
 import { UserForm } from '../../Components/UserForm/UserForm';
+import { Home } from '../Home/Home';
 import './Login.css';
 
 const loginLayout = () => {
@@ -16,13 +18,12 @@ const loginLayout = () => {
   UserForm(loginSection, 'Login', fields);
   main.append(loginSection);
 };
-const local = 'http://localhost:3000';
-const vercel = 'https://project-10-backend.vercel.app';
-const loginSubmit = (e) => {
+
+const loginSubmit = async (e) => {
   e.preventDefault();
   const username = document.querySelector('#username').value;
   const password = document.querySelector('#password').value;
-  fetch(vercel + '/api/v1/users/login', {
+  const res = await fetch(vercelUrl + '/api/v1/users/login', {
     headers: {
       'Content-Type': 'application/json'
     },
@@ -31,15 +32,20 @@ const loginSubmit = (e) => {
       username,
       password
     })
-  })
-    .then((res) => res.json())
-    .then((response) => {
-      localStorage.setItem('token', response.token);
-      Header();
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  });
+
+  if (res.status === 400) {
+    const loginErrorMessage = document.createElement('p');
+    const submitButton = document.querySelector('button.submit');
+    loginErrorMessage.innerText = 'Nombre de usuario o contraseña incorrecto';
+    loginErrorMessage.style.color = 'var(--color-light)';
+    submitButton.insertAdjacentElement('beforebegin', loginErrorMessage);
+  } else {
+    const response = await res.json();
+    localStorage.setItem('token', response.token);
+    Header();
+    Home();
+  }
 };
 
 export const Login = () => {

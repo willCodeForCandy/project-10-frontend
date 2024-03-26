@@ -1,13 +1,11 @@
 import { Header } from './src/Components/HeaderNav/HeaderNav';
-import { Login } from './src/Pages/Login/Login';
-import { Register } from './src/Pages/Register/Register';
+import { Home } from './src/Pages/Home/Home';
 import './style.css';
-
-const local = 'http://localhost:3000';
-const vercel = 'https://project-10-backend.vercel.app';
+export const localUrl = 'http://localhost:3000';
+export const vercelUrl = 'https://project-10-backend.vercel.app';
 // Register();
-
 Header();
+Home();
 
 // fetch(vercel + '/api/v1/boardgames')
 //   .then((res) => res.json())

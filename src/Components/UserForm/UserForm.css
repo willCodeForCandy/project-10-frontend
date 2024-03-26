@@ -48,21 +48,3 @@ input:valid ~ label {
   padding: 0 0.2em;
   color: var(--color-accent);
 }
-
-.submit {
-  background-color: var(--color-accent);
-  border-radius: 12px;
-  border: 0;
-  box-sizing: border-box;
-  color: var(--color-dark);
-  cursor: pointer;
-  font-size: 18px;
-  height: 50px;
-  margin-top: 38px;
-  text-align: center;
-  width: 100%;
-}
-
-.submit:active {
-  background-color: #e6bc02;
-}

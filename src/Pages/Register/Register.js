@@ -1,3 +1,4 @@
+import { vercelUrl } from '../../../main';
 import { UserForm } from '../../Components/UserForm/UserForm';
 import './Register.css';
 
@@ -16,15 +17,14 @@ const registerLayout = () => {
   UserForm(registerSection, 'Register', fields);
   main.append(registerSection);
 };
-const local = 'http://localhost:3000';
-const vercel = 'https://project-10-backend.vercel.app';
+
 const registerSubmit = async (e) => {
   e.preventDefault();
   const username = document.querySelector('#username').value;
   const password = document.querySelector('#password').value;
   const email = document.querySelector('#email').value;
   try {
-    await fetch(vercel + '/api/v1/users/register', {
+    await fetch(vercelUrl + '/api/v1/users/register', {
       headers: {
         'Content-Type': 'application/json'
       },
