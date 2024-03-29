@@ -14,8 +14,8 @@
   flex-grow: 1;
   padding: var(--spacing-l);
   gap: var(--spacing-m);
-  background-color: var(--color-dark);
-  color: var(--color-light);
+  background-color: var(--color-dark-1);
+  color: var(--color-light-1);
   width: 40%;
   height: 100%;
 }

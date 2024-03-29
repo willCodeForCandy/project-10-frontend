@@ -40,7 +40,7 @@ const loginSubmit = async (e) => {
     const loginErrorMessage = document.createElement('p');
     const submitButton = document.querySelector('button.submit');
     loginErrorMessage.innerText = 'Nombre de usuario o contraseña incorrecto';
-    loginErrorMessage.style.color = 'var(--color-light)';
+    loginErrorMessage.style.color = 'var(--color-light-1)';
     submitButton.insertAdjacentElement('beforebegin', loginErrorMessage);
   } else {
     previousErrorMessage?.remove();

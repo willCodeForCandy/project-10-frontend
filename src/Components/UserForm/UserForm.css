@@ -1,5 +1,5 @@
 form.user-form {
-  background-color: var(--color-dark);
+  background-color: var(--color-dark-1);
   border-radius: var(--border-radius-l);
   height: 500px;
   padding: var(--spacing-m);
@@ -38,13 +38,13 @@ form.user-form {
 .input:focus,
 input:valid {
   outline: none;
-  border: 1.5px solid var(--color-accent);
+  border: 1.5px solid var(--color-accent-1);
 }
 
 .input:focus ~ label,
 input:valid ~ label {
   transform: translateY(-50%) scale(0.8);
-  background-color: var(--color-dark);
+  background-color: var(--color-dark-1);
   padding: 0 0.2em;
-  color: var(--color-accent);
+  color: var(--color-accent-1);
 }
