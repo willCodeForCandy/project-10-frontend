@@ -5,6 +5,7 @@ import { Home } from '../Home/Home';
 import './Login.css';
 
 const loginLayout = () => {
+  //Selecciono y limpio el main
   const main = document.querySelector('main');
   main.innerHTML = '';
   //Creo el contenedor para el formulario
@@ -34,7 +35,6 @@ const loginSubmit = async (e) => {
     })
   });
   const previousErrorMessage = document.querySelector('#login p');
-  console.log(previousErrorMessage);
   if (res.status === 400) {
     previousErrorMessage?.remove();
     const loginErrorMessage = document.createElement('p');
@@ -46,7 +46,7 @@ const loginSubmit = async (e) => {
     previousErrorMessage?.remove();
     const response = await res.json();
     localStorage.setItem('token', response.token);
-    localStorage.setItem('user', response.user);
+    localStorage.setItem('user', response.user); //TODO: revisar! Esto no funciona!!
     Header();
     Home();
   }

@@ -47,6 +47,7 @@ export const Header = () => {
     logLink.addEventListener('click', () => {
       localStorage.removeItem('token');
       Header();
+      Home();
     });
   } else {
     logLink.append(loginMenuLayout());

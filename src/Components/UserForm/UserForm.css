@@ -7,7 +7,7 @@ form.user-form {
 }
 
 .user-form h2 {
-  color: var(--color-light);
+  color: var(--color-light-1);
   flex-basis: 100%;
   text-align: center;
 }
@@ -17,12 +17,12 @@ form.user-form {
 }
 
 .input {
-  border: solid 1.5px var(--color-mid);
+  border: solid 1.5px var(--color-light-2);
   border-radius: var(--border-radius-l);
   background: none;
   padding: 1rem;
   font-size: 1rem;
-  color: var(--color-mid);
+  color: var(--color-light-2);
   transition: border 150ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 

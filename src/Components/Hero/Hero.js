@@ -1,3 +1,5 @@
+import { Login } from '../../Pages/Login/Login';
+import { NewEventForm } from '../NewEventForm/NewEventForm';
 import './Hero.css';
 
 export const heroData = {
@@ -22,8 +24,8 @@ export const Hero = (parentNode, { text, image }) => {
   parentNode.innerHTML = heroSection({ text, image });
   const heroButton = document.querySelector('#hero button');
   if (localStorage.getItem('token')) {
-    heroButton.addEventListener('click', () => console.log('Crear Evento'));
+    heroButton.addEventListener('click', NewEventForm);
   } else {
-    heroButton.addEventListener('click', () => Login);
+    heroButton.addEventListener('click', Login);
   }
 };
