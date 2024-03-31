@@ -46,6 +46,7 @@ const loginSubmit = async (e) => {
     previousErrorMessage?.remove();
     const response = await res.json();
     localStorage.setItem('token', response.token);
+    localStorage.setItem('user', response.user);
     Header();
     Home();
   }

@@ -7,7 +7,6 @@ export const vercelUrl = 'https://project-10-backend.vercel.app';
 // Register();
 Header();
 Home();
-
 // fetch(vercel + '/api/v2/boardgames')
 //   .then((res) => res.json())
 //   .then((res) => {

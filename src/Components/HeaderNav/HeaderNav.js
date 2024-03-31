@@ -1,3 +1,4 @@
+import { Events } from '../../Pages/Events/Events';
 import { Home } from '../../Pages/Home/Home';
 import { Login } from '../../Pages/Login/Login';
 import { Register } from '../../Pages/Register/Register';
@@ -38,6 +39,8 @@ export const Header = () => {
   header.innerHTML = navLayout();
   const homeLink = document.querySelector('#home-link');
   homeLink.addEventListener('click', Home);
+  const eventsLink = document.querySelector('#events-link');
+  eventsLink.addEventListener('click', Events);
   const logLink = document.querySelector('#log-link');
   if (localStorage.getItem('token')) {
     document.querySelector('#menu-login');
@@ -47,5 +50,12 @@ export const Header = () => {
     });
   } else {
     logLink.append(loginMenuLayout());
+  }
+};
+
+export const cleanHeader = () => {
+  const headerLinks = document.querySelectorAll('header > nav > ul > li > a');
+  for (const link of headerLinks) {
+    link.classList.remove('current-location');
   }
 };
