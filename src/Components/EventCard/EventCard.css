@@ -1,0 +1,32 @@
+.events-container > article {
+  width: 220px;
+  border-radius: var(--border-radius-l);
+  overflow: hidden;
+  gap: var(--spacing-s);
+  box-shadow: 5px 10px 15px 3px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+}
+.events-container > article > div {
+  width: 100%;
+}
+.events-container > article > div.img-container {
+  display: flex;
+  align-self: flex-start;
+  align-items: center;
+  justify-content: center;
+}
+.events-container > article > div > img {
+  max-height: 250px;
+  object-fit: cover;
+}
+.events-container > article > div.event-info {
+  padding: 0 var(--spacing-m);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.events-container button {
+  margin: var(--spacing-m);
+  margin-top: 0;
+}

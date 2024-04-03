@@ -24,7 +24,7 @@ const registerSubmit = async (e) => {
   const password = document.querySelector('#password').value;
   const email = document.querySelector('#email').value;
   try {
-    await fetch(vercelUrl + '/api/v2/users/register', {
+    await fetch(vercelUrl + '/users/register', {
       headers: {
         'Content-Type': 'application/json'
       },

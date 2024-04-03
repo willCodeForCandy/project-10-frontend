@@ -1,7 +1,6 @@
 import { cleanHeader } from '../../Components/HeaderNav/HeaderNav';
 import { NewEventForm } from '../../Components/NewEventForm/NewEventForm';
-import { PastEvents } from '../../Components/PastEvents/PastEvents';
-import { UpcomingEvents } from '../../Components/UpcomingEvents/UpcomingEvents';
+import { EventsSection } from '../../Components/EventsSection/EventsSection';
 import './Events.css';
 
 export const Events = async () => {
@@ -15,6 +14,12 @@ export const Events = async () => {
   createEventButton.id = 'create-event-btn';
   createEventButton.addEventListener('click', NewEventForm);
   main.append(createEventButton);
-  await UpcomingEvents(main);
-  await PastEvents(main);
+  await EventsSection(main, {
+    title: 'Próximos Eventos',
+    eventTiming: 'isUpcoming'
+  });
+  await EventsSection(main, {
+    title: 'Eventos Pasados',
+    eventTiming: 'isPast'
+  });
 };

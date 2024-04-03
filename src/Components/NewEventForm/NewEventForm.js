@@ -27,7 +27,7 @@ const postEvent = async (e) => {
   const gameId = dataList
     .querySelector(`[value="${gameName}"]`)
     .getAttribute('data-id');
-  const res = await fetch(vercelUrl + '/api/v2/events/', {
+  const res = await fetch(vercelUrl + '/events/', {
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`

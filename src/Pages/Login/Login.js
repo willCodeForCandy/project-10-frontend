@@ -24,7 +24,7 @@ const loginSubmit = async (e) => {
   e.preventDefault();
   const username = document.querySelector('#username').value;
   const password = document.querySelector('#password').value;
-  const res = await fetch(vercelUrl + '/api/v2/users/login', {
+  const res = await fetch(vercelUrl + '/users/login', {
     headers: {
       'Content-Type': 'application/json'
     },
@@ -46,7 +46,7 @@ const loginSubmit = async (e) => {
     previousErrorMessage?.remove();
     const response = await res.json();
     localStorage.setItem('token', response.token);
-    localStorage.setItem('user', response.user); //TODO: revisar! Esto no funciona!!
+    localStorage.setItem('user', JSON.stringify(response.user));
     Header();
     Home();
   }
