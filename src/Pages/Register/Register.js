@@ -1,5 +1,6 @@
 import { vercelUrl } from '../../../main';
 import { UserForm } from '../../Components/UserForm/UserForm';
+import { Login } from '../Login/Login';
 import './Register.css';
 
 const registerLayout = () => {
@@ -23,21 +24,23 @@ const registerSubmit = async (e) => {
   const username = document.querySelector('#username').value;
   const password = document.querySelector('#password').value;
   const email = document.querySelector('#email').value;
-  try {
-    await fetch(vercelUrl + '/users/register', {
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      method: 'POST',
-      body: JSON.stringify({
-        username,
-        email,
-        password
-      })
-    });
-  } catch (error) {
-    console.log(error);
+  const response = await fetch(vercelUrl + '/users/register', {
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    method: 'POST',
+    body: JSON.stringify({
+      username,
+      email,
+      password
+    })
+  });
+  const data = await response.json();
+  if (response.status !== 201) {
+    console.log(response, data);
   }
+
+  Login();
 };
 
 export const Register = () => {
