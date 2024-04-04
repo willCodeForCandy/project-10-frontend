@@ -1,4 +1,5 @@
 import { vercelUrl } from '../../../main';
+import { JoinEventButton } from '../JoinEventButton/JoinEventButton';
 import './EventCard.css';
 
 export const EventCard = (eventObject) => {
@@ -22,29 +23,10 @@ export const EventCard = (eventObject) => {
   const eventPic = document.createElement('img');
   eventPic.src = eventObject.game?.img[0];
   eventPic.alt = eventObject.game?.name || 'Sin imagen para el evento';
-  const joinEventButton = document.createElement('button');
-  joinEventButton.textContent = 'Unirme';
-  const { _id } = eventObject;
-  joinEventButton.addEventListener('click', () => joinEvent(_id));
   /* Organización de la información */
   dataContainer.append(eventName, eventGame, eventDate, eventLocation);
   imgContainer.append(eventPic);
-  eventContainer.append(imgContainer, dataContainer, joinEventButton);
-
+  eventContainer.append(imgContainer, dataContainer);
+  JoinEventButton(eventContainer, eventObject);
   return eventContainer;
-};
-
-const joinEvent = async (eventId) => {
-  const userId = JSON.parse(localStorage.getItem('user'))._id;
-  const token = localStorage.getItem('token');
-  const res = await fetch(vercelUrl + '/events/' + eventId, {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
-    },
-    method: 'PUT',
-    body: JSON.stringify({
-      assistants: userId
-    })
-  });
 };

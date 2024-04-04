@@ -46,6 +46,7 @@ export const Header = () => {
     document.querySelector('#menu-login');
     logLink.addEventListener('click', () => {
       localStorage.removeItem('token');
+      localStorage.removeItem('user');
       Header();
       Home();
     });
