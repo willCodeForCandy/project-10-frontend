@@ -1,6 +1,7 @@
 import { vercelUrl } from '../../../main';
 import { Header } from '../../Components/HeaderNav/HeaderNav';
 import { UserForm } from '../../Components/UserForm/UserForm';
+import { loginForm } from '../../Data/Forms';
 import { Home } from '../Home/Home';
 import './Login.css';
 
@@ -12,11 +13,7 @@ const loginLayout = () => {
   const loginSection = document.createElement('section');
   loginSection.id = 'login';
   //Creo el formulario y sus componentes
-  const fields = [
-    { id: 'username', name: 'Usuario', type: 'text' },
-    { id: 'password', name: 'Contraseña', type: 'password' }
-  ];
-  UserForm(loginSection, 'Login', fields);
+  UserForm(loginSection, 'Login', loginForm);
   main.append(loginSection);
 };
 

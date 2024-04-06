@@ -1,5 +1,6 @@
 import { vercelUrl } from '../../../main';
 import { UserForm } from '../../Components/UserForm/UserForm';
+import { registerForm } from '../../Data/Forms';
 import { Login } from '../Login/Login';
 import './Register.css';
 
@@ -10,12 +11,7 @@ const registerLayout = () => {
   const registerSection = document.createElement('section');
   registerSection.id = 'register';
   //Creo el formulario y sus componentes
-  const fields = [
-    { id: 'username', name: 'Usuario', type: 'text' },
-    { id: 'email', name: 'Email', type: 'email' },
-    { id: 'password', name: 'Contraseña', type: 'password' }
-  ];
-  UserForm(registerSection, 'Register', fields);
+  UserForm(registerSection, 'Register', registerForm);
   const isRegisteredQuery = document.createElement('p');
   isRegisteredQuery.innerHTML = `¿Ya estás registrado? <a href=#>Login</a>`;
   const title = registerSection.querySelector('h2');

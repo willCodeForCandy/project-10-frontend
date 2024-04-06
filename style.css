@@ -55,7 +55,6 @@ section {
   display: flex;
   flex-direction: column;
   place-items: center;
-  margin-top: var(--spacing-xl);
 }
 button {
   background-color: var(--color-accent-1);

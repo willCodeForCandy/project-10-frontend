@@ -1,20 +1,8 @@
 import { vercelUrl } from '../../../main';
+import { createEventForm } from '../../Data/Forms';
 import { getBoardgames } from '../../Utils/getBoardgames';
+import { UserForm } from '../UserForm/UserForm';
 import './NewEventForm.css';
-
-const form = () => `
-<form>
-<label for="name">Nombre del evento</label>
-<input type="text" name="name" id="name" />
-<label for="location">Lugar</label>
-<input type="text" name="location" id="location" />
-<input type="date" name="date" id="date" />
-<label for="game">Juego</label>
-<input list="list-of-games" id="game" name="game">
-<datalist id="list-of-games"></datalist>
-<button type="submit">Crear</button>
-</form>
-`;
 
 const postEvent = async (e) => {
   e.preventDefault();
@@ -40,12 +28,28 @@ const postEvent = async (e) => {
       game: gameId
     })
   });
+  document.querySelector('#create-event').remove();
 };
 export const NewEventForm = () => {
   const eventFormContainer = document.createElement('section');
   eventFormContainer.id = 'create-event';
-  eventFormContainer.innerHTML = form();
+  const closeBtn = document.createElement('span');
+  closeBtn.classList.add('material-symbols-outlined');
+  closeBtn.textContent = 'close';
+  closeBtn.addEventListener('click', () => eventFormContainer.remove());
+  UserForm(eventFormContainer, 'Crea tu propio evento', createEventForm);
+  const gameInputContainer = document.createElement('div');
+  gameInputContainer.classList.add('input-container');
+  gameInputContainer.innerHTML = `  <label class="iLabel" for="game">Juego</label>
+  <input class="input" list="list-of-games" id="game" name="game">
+  <datalist id="list-of-games"></datalist>`;
+  eventFormContainer.append(closeBtn);
   document.body.append(eventFormContainer);
+  document
+    .querySelector('#create-event button')
+    .insertAdjacentElement('beforebegin', gameInputContainer);
+  eventFormContainer.classList.add('visible');
+
   const datalistOfGames = document.querySelector('#list-of-games');
   getBoardgames().then((listOfGames) => {
     console.log(listOfGames);
