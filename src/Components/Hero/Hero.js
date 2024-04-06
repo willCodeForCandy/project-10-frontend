@@ -1,4 +1,4 @@
-import { Login } from '../../Pages/Login/Login';
+import { Register } from '../../Pages/Register/Register';
 import { NewEventForm } from '../NewEventForm/NewEventForm';
 import './Hero.css';
 
@@ -26,6 +26,6 @@ export const Hero = (parentNode, { text, image }) => {
   if (localStorage.getItem('token')) {
     heroButton.addEventListener('click', NewEventForm);
   } else {
-    heroButton.addEventListener('click', Login);
+    heroButton.addEventListener('click', Register);
   }
 };

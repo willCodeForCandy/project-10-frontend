@@ -7,15 +7,12 @@ import './HeaderNav.css';
 const navLayout = () => `
 <ul class="flex-container">
   <li>
-    <a href="#" id="home-link">Home</a>
-  </li>
-  <li>
     <a href="#" id="events-link">Eventos</a>
   </li>
   <li id="log-link">
-    <a href="#">
+
       ${localStorage.getItem('token') ? 'Logout' : 'Identificarse'}
-    </a>
+
   </li>
 </ul>`;
 
@@ -37,7 +34,7 @@ const loginMenuLayout = () => {
 export const Header = () => {
   const header = document.querySelector('header nav');
   header.innerHTML = navLayout();
-  const homeLink = document.querySelector('#home-link');
+  const homeLink = document.querySelector('#meeple-logo');
   homeLink.addEventListener('click', Home);
   const eventsLink = document.querySelector('#events-link');
   eventsLink.addEventListener('click', Events);

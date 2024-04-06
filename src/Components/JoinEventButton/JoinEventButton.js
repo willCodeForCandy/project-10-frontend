@@ -1,7 +1,7 @@
 import { vercelUrl } from '../../../main';
 import './JoinEventButton.css';
 
-export const JoinEventButton = (butonContainer, eventObject) => {
+export const JoinEventButton = (buttonContainer, eventObject) => {
   if (localStorage.getItem('token')) {
     const user = JSON.parse(localStorage.getItem('user'));
     const eventId = eventObject._id;
@@ -21,7 +21,7 @@ export const JoinEventButton = (butonContainer, eventObject) => {
         joinEvent(e, eventId, user._id);
       });
     }
-    butonContainer.append(joinEventButton);
+    buttonContainer.append(joinEventButton);
   }
 };
 

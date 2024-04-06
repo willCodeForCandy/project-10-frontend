@@ -14,6 +14,7 @@ export const EventsSection = async (parentNode, { title, eventTiming }) => {
   const eventDiv = document.createElement('div');
   eventDiv.append(loader);
   eventSection.append(eventDiv);
+  parentNode.append(eventSection);
   const listOfEvents = await getEvents();
   for (let event of listOfEvents) {
     event = dateComparator(event);
@@ -24,5 +25,4 @@ export const EventsSection = async (parentNode, { title, eventTiming }) => {
       eventDiv.append(eventCard);
     }
   }
-  parentNode.append(eventSection);
 };

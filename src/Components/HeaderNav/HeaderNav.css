@@ -2,4 +2,26 @@ header.flex-container {
   width: 100%;
   justify-content: space-between;
   padding: var(--spacing-m);
+  /* height: 5vh; */
+}
+
+#log-link {
+  position: relative;
+}
+#menu-login {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  top: 20px;
+  background-color: var(--color-light-2);
+  padding: var(--spacing-s);
+  gap: var(--spacing-s);
+}
+
+#log-link:hover #menu-login {
+  display: flex;
+}
+
+header li {
+  cursor: pointer;
 }

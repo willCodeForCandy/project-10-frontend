@@ -6,8 +6,6 @@ import './Home.css';
 
 export const Home = async () => {
   cleanHeader();
-  const homeLink = document.querySelector('#home-link');
-  homeLink.classList.add('current-location');
 
   const main = document.querySelector('main');
   Hero(main, heroData);

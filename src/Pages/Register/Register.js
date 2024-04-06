@@ -16,6 +16,11 @@ const registerLayout = () => {
     { id: 'password', name: 'Contraseña', type: 'password' }
   ];
   UserForm(registerSection, 'Register', fields);
+  const isRegisteredQuery = document.createElement('p');
+  isRegisteredQuery.innerHTML = `¿Ya estás registrado? <a href=#>Login</a>`;
+  const title = registerSection.querySelector('h2');
+  title.insertAdjacentElement('afterend', isRegisteredQuery);
+  isRegisteredQuery.querySelector('a').addEventListener('click', Login);
   main.append(registerSection);
 };
 
