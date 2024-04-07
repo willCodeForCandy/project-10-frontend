@@ -1,9 +1,16 @@
 #register {
   background-image: url('/assets/boardgame02.avif');
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat; /* Do not repeat the image */
-  background-size: cover; /* Resize the background image to cover the entire container */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   margin: 0;
   padding: var(--spacing-m);
   color: var(--color-light-1);
+  flex-grow: 1;
+  justify-content: center;
+}
+
+#register a {
+  color: var(--color-accent-1);
+  font-weight: bold;
 }

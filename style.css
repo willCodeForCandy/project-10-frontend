@@ -43,11 +43,18 @@ body {
   min-height: 100svh;
 }
 
+#app {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
 main {
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  flex-grow: 1;
 }
 
 section {
@@ -56,19 +63,33 @@ section {
   flex-direction: column;
   place-items: center;
 }
-button {
-  background-color: var(--color-accent-1);
-  border-radius: 12px;
-  border: 0;
+a {
   color: var(--color-dark-1);
-  cursor: pointer;
-  font-size: 18px;
-  height: 50px;
+}
+button {
+  display: inline-block;
+  padding: var(--spacing-s) var(--spacing-m);
+  font-size: 20px;
+  font-weight: bold;
   text-align: center;
-  width: 100%;
+  text-decoration: none;
+  color: var(--color-dark-1);
+  background-color: var(--color-accent-1);
+  border: 2px solid #000;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-family: Montserrat;
+}
+button:hover {
+  background-color: var(--color-light-1);
+  color: var(--color-dark-1);
+  border: 2px solid var(--color-accent-1);
 }
 button:active {
-  filter: brightness(70%);
+  background-color: var(--color-accent-2);
+  box-shadow: none;
+  transform: translateY(4px);
 }
 
 #meeple-logo {

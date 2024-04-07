@@ -6,7 +6,7 @@ import './Events.css';
 export const Events = async () => {
   cleanHeader();
   const eventsLink = document.querySelector('#events-link');
-  eventsLink.classList.add('current-location');
+  eventsLink.parentElement.classList.add('current-location');
   const main = document.querySelector('main');
   main.innerHTML = '';
   const createEventButton = document.createElement('button');

@@ -37,6 +37,7 @@ export const Header = () => {
   const homeLink = document.querySelector('#meeple-logo');
   homeLink.addEventListener('click', Home);
   const eventsLink = document.querySelector('#events-link');
+  console.log(eventsLink);
   eventsLink.addEventListener('click', Events);
   const logLink = document.querySelector('#log-link');
   if (localStorage.getItem('token')) {
@@ -53,7 +54,7 @@ export const Header = () => {
 };
 
 export const cleanHeader = () => {
-  const headerLinks = document.querySelectorAll('header > nav > ul > li > a');
+  const headerLinks = document.querySelectorAll('header > nav > ul > li');
   for (const link of headerLinks) {
     link.classList.remove('current-location');
   }
