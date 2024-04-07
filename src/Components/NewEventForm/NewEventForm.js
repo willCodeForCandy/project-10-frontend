@@ -1,8 +1,10 @@
+import Toastify from 'toastify-js';
 import { vercelUrl } from '../../../main';
 import { createEventForm } from '../../Data/Forms';
 import { getBoardgames } from '../../Utils/getBoardgames';
 import { UserForm } from '../UserForm/UserForm';
 import './NewEventForm.css';
+import { showToast } from '../Toast/Toast';
 
 const postEvent = async (e) => {
   e.preventDefault();
@@ -28,7 +30,14 @@ const postEvent = async (e) => {
       game: gameId
     })
   });
-  document.querySelector('#create-event').remove();
+  const response = await res.json();
+  if (res.status === 201) {
+    const { message } = response;
+    showToast(message, 'linear-gradient(to right, #00b09b, #96c93d)');
+    document.querySelector('#create-event').remove();
+  } else {
+    showToast(response, 'red');
+  }
 };
 export const NewEventForm = () => {
   const eventFormContainer = document.createElement('section');
@@ -52,7 +61,6 @@ export const NewEventForm = () => {
 
   const datalistOfGames = document.querySelector('#list-of-games');
   getBoardgames().then((listOfGames) => {
-    console.log(listOfGames);
     for (const game of listOfGames) {
       const option = document.createElement('option');
       option.value = game.title;

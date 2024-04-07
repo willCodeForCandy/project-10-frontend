@@ -1,8 +1,10 @@
+import Toastify from 'toastify-js';
 import { vercelUrl } from '../../../main';
 import { UserForm } from '../../Components/UserForm/UserForm';
 import { registerForm } from '../../Data/Forms';
 import { Login } from '../Login/Login';
 import './Register.css';
+import { showToast } from '../../Components/Toast/Toast';
 
 const registerLayout = () => {
   const main = document.querySelector('main');
@@ -10,21 +12,25 @@ const registerLayout = () => {
   //Creo el contenedor para el formulario de registro
   const registerSection = document.createElement('section');
   registerSection.id = 'register';
-  //Creo el formulario y sus componentes
+  //Creo el formulario
   UserForm(registerSection, 'Register', registerForm);
+  //Agrego un link a la sección de registro
   const isRegisteredQuery = document.createElement('p');
   isRegisteredQuery.innerHTML = `¿Ya estás registrado? <a href=#>Login</a>`;
   const title = registerSection.querySelector('h2');
   title.insertAdjacentElement('afterend', isRegisteredQuery);
   isRegisteredQuery.querySelector('a').addEventListener('click', Login);
+  //Agrego los componentes al contenedor
   main.append(registerSection);
 };
 
 const registerSubmit = async (e) => {
   e.preventDefault();
+  //Recojo los datos del formulario
   const username = document.querySelector('#username').value;
   const password = document.querySelector('#password').value;
   const email = document.querySelector('#email').value;
+  //Los envio a la BBDD con un post request
   const response = await fetch(vercelUrl + '/users/register', {
     headers: {
       'Content-Type': 'application/json'
@@ -36,12 +42,15 @@ const registerSubmit = async (e) => {
       password
     })
   });
+  //Recojo la respuesta
   const data = await response.json();
+  //Si hay algun error, lo muestro al usuario
   if (response.status !== 201) {
-    console.log(response, data);
+    showToast(data, 'red');
+  } else {
+    //Si no hay errores, redirijo al login
+    Login();
   }
-
-  Login();
 };
 
 export const Register = () => {

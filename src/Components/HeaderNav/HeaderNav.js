@@ -37,7 +37,6 @@ export const Header = () => {
   const homeLink = document.querySelector('#meeple-logo');
   homeLink.addEventListener('click', Home);
   const eventsLink = document.querySelector('#events-link');
-  console.log(eventsLink);
   eventsLink.addEventListener('click', Events);
   const logLink = document.querySelector('#log-link');
   if (localStorage.getItem('token')) {
