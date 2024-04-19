@@ -1,4 +1,4 @@
-export const dateComparator = (event) => {
+export const dateComparator = event => {
   const today = new Date();
   const eventDate = new Date(event.date);
   if (eventDate < today) {
@@ -8,3 +8,6 @@ export const dateComparator = (event) => {
   }
   return event;
 };
+
+export const sortByDate = data =>
+  data.sort(({ date: a }, { date: b }) => (a < b ? -1 : a > b ? 1 : 0));

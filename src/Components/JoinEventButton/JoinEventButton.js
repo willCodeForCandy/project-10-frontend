@@ -1,4 +1,3 @@
-import Toastify from 'toastify-js';
 import { vercelUrl } from '../../../main';
 import './JoinEventButton.css';
 import { showToast } from '../Toast/Toast';
@@ -10,19 +9,19 @@ export const JoinEventButton = (buttonContainer, eventObject) => {
     const eventId = eventObject._id;
     const joinEventButton = document.createElement('button');
     const userIsGoing = eventObject.assistants.find(
-      (assistant) => assistant._id === user._id
+      assistant => assistant._id === user._id
     );
     if (userIsGoing) {
       //Si ya está anotado, el botón le permite darse de baja
       joinEventButton.textContent = 'Darme de baja';
       joinEventButton.classList.add('negative');
-      joinEventButton.addEventListener('click', (e) => {
+      joinEventButton.addEventListener('click', e => {
         leaveEvent(e, eventId);
       });
     } else {
       //Si no está anotado, click en el botón para informar su asistencia
       joinEventButton.textContent = 'Unirme';
-      joinEventButton.addEventListener('click', (e) => {
+      joinEventButton.addEventListener('click', e => {
         joinEvent(e, eventId, user._id);
       });
     }
@@ -36,12 +35,12 @@ const joinEvent = async (e, eventId, userId) => {
   const res = await fetch(vercelUrl + '/events/' + eventId, {
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     },
     method: 'PUT',
     body: JSON.stringify({
-      assistants: userId
-    })
+      assistants: userId,
+    }),
   });
   const response = await res.json();
   //Si sale todo bien, se actualiza el botón
@@ -60,9 +59,9 @@ const leaveEvent = async (e, eventId) => {
   const token = localStorage.getItem('token');
   const res = await fetch(`${vercelUrl}/events/${eventId}/removeAssistant`, {
     headers: {
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     },
-    method: 'PUT'
+    method: 'PUT',
   });
   const response = await res.json();
   const { updatedEvent } = response;

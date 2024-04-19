@@ -34,3 +34,7 @@
   justify-content: space-between;
   flex-grow: 1;
 }
+
+.events-container > article > div.event-info > div {
+  width: 100%;
+}

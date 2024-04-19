@@ -1,6 +1,9 @@
 import { cleanHeader } from '../../Components/HeaderNav/HeaderNav';
 import { NewEventForm } from '../../Components/NewEventForm/NewEventForm';
-import { EventsSection } from '../../Components/EventsSection/EventsSection';
+import {
+  EventsSection,
+  listOfEvents,
+} from '../../Components/EventsSection/EventsSection';
 import './Events.css';
 import { Register } from '../Register/Register';
 
@@ -23,12 +26,16 @@ export const Events = async () => {
     const linkRegistro = main.querySelector('.aviso a');
     linkRegistro.addEventListener('click', Register);
   }
-  await EventsSection(main, {
+  const nextEvents = EventsSection({
     title: 'Próximos Eventos',
-    eventTiming: 'isUpcoming'
+    eventTiming: 'isUpcoming',
   });
-  await EventsSection(main, {
+  const pastEvents = EventsSection({
     title: 'Eventos Pasados',
-    eventTiming: 'isPast'
+    eventTiming: 'isPast',
   });
+
+  main.append(nextEvents, pastEvents);
+  await listOfEvents(nextEvents.querySelector('div'), 'isUpcoming');
+  await listOfEvents(pastEvents.querySelector('div'), 'isPast');
 };

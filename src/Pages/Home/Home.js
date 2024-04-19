@@ -1,6 +1,9 @@
 import { cleanHeader } from '../../Components/HeaderNav/HeaderNav';
 import { Hero, heroData } from '../../Components/Hero/Hero';
-import { EventsSection } from '../../Components/EventsSection/EventsSection';
+import {
+  EventsSection,
+  listOfEvents,
+} from '../../Components/EventsSection/EventsSection';
 
 import './Home.css';
 
@@ -10,8 +13,10 @@ export const Home = async () => {
   const main = document.querySelector('main');
   Hero(main, heroData);
 
-  await EventsSection(main, {
+  const eventSection = EventsSection({
     title: 'Próximos Eventos',
-    eventTiming: 'isUpcoming'
+    eventTiming: 'isUpcoming',
   });
+  main.append(eventSection);
+  await listOfEvents(eventSection.querySelector('div'), 'isUpcoming');
 };
