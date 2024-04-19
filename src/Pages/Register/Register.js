@@ -2,7 +2,7 @@ import Toastify from 'toastify-js';
 import { vercelUrl } from '../../../main';
 import { UserForm } from '../../Components/UserForm/UserForm';
 import { registerForm } from '../../Data/Forms';
-import { Login } from '../Login/Login';
+import { Login, loginRequest } from '../Login/Login';
 import './Register.css';
 import { showToast } from '../../Components/Toast/Toast';
 
@@ -24,7 +24,7 @@ const registerLayout = () => {
   main.append(registerSection);
 };
 
-const registerSubmit = async (e) => {
+const registerSubmit = async e => {
   e.preventDefault();
   //Recojo los datos del formulario
   const username = document.querySelector('#username').value;
@@ -33,14 +33,14 @@ const registerSubmit = async (e) => {
   //Los envio a la BBDD con un post request
   const response = await fetch(vercelUrl + '/users/register', {
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
     method: 'POST',
     body: JSON.stringify({
       username,
       email,
-      password
-    })
+      password,
+    }),
   });
   //Recojo la respuesta
   const data = await response.json();
@@ -48,8 +48,8 @@ const registerSubmit = async (e) => {
   if (response.status !== 201) {
     showToast(data, 'red');
   } else {
-    //Si no hay errores, redirijo al login
-    Login();
+    //Si no hay errores, logueo al usuario y redirijo al home
+    loginRequest(username, password);
   }
 };
 
