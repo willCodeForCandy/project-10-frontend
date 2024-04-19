@@ -4,8 +4,6 @@ import { getBoardgames } from '../../Utils/getBoardgames';
 import { UserForm } from '../UserForm/UserForm';
 import './NewEventForm.css';
 import { showToast } from '../Toast/Toast';
-import { EventCard } from '../EventCard/EventCard';
-import { getEvents } from '../../Utils/getEvents';
 import { listOfEvents } from '../EventsSection/EventsSection';
 
 const postEvent = async e => {
@@ -48,7 +46,6 @@ const postEvent = async e => {
   }
 };
 export const NewEventForm = () => {
-  const today = new Date();
   const eventFormContainer = document.createElement('section');
   eventFormContainer.id = 'create-event';
 
@@ -58,7 +55,15 @@ export const NewEventForm = () => {
   closeBtn.addEventListener('click', () => eventFormContainer.remove());
 
   UserForm(eventFormContainer, 'Crea tu propio evento', createEventForm);
-
+  eventFormContainer
+    .querySelector('[type="date"]')
+    .addEventListener('change', e => {
+      const inputDate = new Date(e.target.value);
+      const now = new Date();
+      if (now > inputDate) {
+        alert('La fecha del evento debe ser futura');
+      }
+    });
   const gameInputContainer = document.createElement('div');
   gameInputContainer.classList.add('input-container');
   gameInputContainer.innerHTML = `  <label class="iLabel" for="game">Juego</label>

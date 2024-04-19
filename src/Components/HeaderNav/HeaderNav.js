@@ -39,6 +39,7 @@ export const Header = () => {
   const eventsLink = document.querySelector('#events-link');
   eventsLink.addEventListener('click', Events);
   const logLink = document.querySelector('#log-link');
+
   if (localStorage.getItem('token')) {
     document.querySelector('#menu-login');
     logLink.addEventListener('click', () => {
