@@ -66,6 +66,7 @@ a {
   color: var(--color-dark-1);
 }
 button {
+  position: relative;
   display: inline-block;
   padding: var(--spacing-s) var(--spacing-m);
   font-size: 20px;

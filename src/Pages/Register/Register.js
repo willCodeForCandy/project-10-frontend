@@ -1,4 +1,3 @@
-import Toastify from 'toastify-js';
 import { vercelUrl } from '../../../main';
 import { UserForm } from '../../Components/UserForm/UserForm';
 import { registerForm } from '../../Data/Forms';

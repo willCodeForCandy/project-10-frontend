@@ -31,6 +31,7 @@ export const JoinEventButton = (buttonContainer, eventObject) => {
 
 /* Lógica para sumarse al evento */
 const joinEvent = async (e, eventId, userId) => {
+  e.target.classList.add('loading');
   const token = localStorage.getItem('token');
   const res = await fetch(vercelUrl + '/events/' + eventId, {
     headers: {
@@ -56,6 +57,7 @@ const joinEvent = async (e, eventId, userId) => {
 
 /* Lógica para bajarse del evento */
 const leaveEvent = async (e, eventId) => {
+  e.target.classList.add('loading');
   const token = localStorage.getItem('token');
   const res = await fetch(`${vercelUrl}/events/${eventId}/removeAssistant`, {
     headers: {
