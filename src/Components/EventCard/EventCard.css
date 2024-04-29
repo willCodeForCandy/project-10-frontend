@@ -8,6 +8,7 @@
   flex-shrink: 0;
   flex-direction: column;
   justify-content: flex-start;
+  position: relative;
 }
 .events-container > article > div {
   width: 100%;

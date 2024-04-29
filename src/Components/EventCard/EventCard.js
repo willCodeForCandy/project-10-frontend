@@ -1,3 +1,4 @@
+import { DeleteEventButton } from '../DeleteEventButton/DeleteEventButton';
 import { JoinEventButton } from '../JoinEventButton/JoinEventButton';
 import './EventCard.css';
 
@@ -19,7 +20,7 @@ export const EventCard = eventObject => {
     </div>
   </div>
   `;
-
+  DeleteEventButton(eventContainer, eventObject);
   if (eventObject.isUpcoming) {
     JoinEventButton(eventContainer.querySelector('.event-info'), eventObject);
   }

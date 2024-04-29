@@ -5,6 +5,7 @@ import { UserForm } from '../UserForm/UserForm';
 import './NewEventForm.css';
 import { showToast } from '../Toast/Toast';
 import { listOfEvents } from '../EventsSection/EventsSection';
+import { Modal } from '../Modal/Modal';
 
 const postEvent = async e => {
   e.preventDefault();
@@ -46,13 +47,8 @@ const postEvent = async e => {
   }
 };
 export const NewEventForm = () => {
-  const eventFormContainer = document.createElement('section');
+  const eventFormContainer = Modal();
   eventFormContainer.id = 'create-event';
-
-  const closeBtn = document.createElement('span');
-  closeBtn.classList.add('material-symbols-outlined');
-  closeBtn.textContent = 'close';
-  closeBtn.addEventListener('click', () => eventFormContainer.remove());
 
   UserForm(eventFormContainer, 'Crea tu propio evento', createEventForm);
   eventFormContainer
@@ -69,12 +65,11 @@ export const NewEventForm = () => {
   gameInputContainer.innerHTML = `  <label class="iLabel" for="game">Juego</label>
   <input class="input" list="list-of-games" id="game" name="game">
   <datalist id="list-of-games"></datalist>`;
-  eventFormContainer.append(closeBtn);
+
   document.body.append(eventFormContainer);
   document
     .querySelector('#create-event button')
     .insertAdjacentElement('beforebegin', gameInputContainer);
-  eventFormContainer.classList.add('visible');
 
   const datalistOfGames = document.querySelector('#list-of-games');
   getBoardgames().then(listOfGames => {
