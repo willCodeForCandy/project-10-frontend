@@ -55,6 +55,6 @@ const registerSubmit = async e => {
 export const Register = () => {
   registerLayout();
   document
-    .querySelector('#register .submit')
-    .addEventListener('click', registerSubmit);
+    .querySelector('#register form')
+    .addEventListener('submit', registerSubmit);
 };
