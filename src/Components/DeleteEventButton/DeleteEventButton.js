@@ -43,10 +43,7 @@ const deleteEvent = async (e, eventId) => {
   if (res.status === 200) {
     console.log(response, e.target, e.target.parentNode);
     showToast(response.message, 'red');
-    const upcomingEventsDiv = document.querySelector(
-      'section.isUpcoming > div'
-    );
-    await listOfEvents(upcomingEventsDiv, 'isUpcoming');
+    e.target.parentNode.remove();
     document.querySelector('.modal').remove();
   } else {
     //Si no, se informa al usuario del error
