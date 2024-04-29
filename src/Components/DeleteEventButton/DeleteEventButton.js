@@ -2,7 +2,6 @@ import { vercelUrl } from '../../../main';
 import './DeleteEventButton.css';
 import { showToast } from '../Toast/Toast';
 import { Modal } from '../Modal/Modal';
-import { listOfEvents } from '../EventsSection/EventsSection';
 
 export const DeleteEventButton = (buttonContainer, eventObject) => {
   const user = JSON.parse(localStorage.getItem('user'));
@@ -22,6 +21,7 @@ export const DeleteEventButton = (buttonContainer, eventObject) => {
       confirmationBtn.addEventListener('click', () => {
         confirmationBtn.classList.add('loading');
         deleteEvent(event, eventId);
+        //tomo el evento del listener original para poder eliminar la tarjeta facilmente
       });
     });
     buttonContainer.append(deleteEventButton);
@@ -41,7 +41,6 @@ const deleteEvent = async (e, eventId) => {
   const response = await res.json();
   //Si sale todo bien, se elimina la tarjeta y se muestra un mensaje
   if (res.status === 200) {
-    console.log(response, e.target, e.target.parentNode);
     showToast(response.message, 'red');
     e.target.parentNode.remove();
     document.querySelector('.modal').remove();

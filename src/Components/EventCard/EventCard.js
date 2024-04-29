@@ -20,7 +20,9 @@ export const EventCard = eventObject => {
     </div>
   </div>
   `;
-  DeleteEventButton(eventContainer, eventObject);
+  if (localStorage.getItem('user')) {
+    DeleteEventButton(eventContainer, eventObject);
+  }
   if (eventObject.isUpcoming) {
     JoinEventButton(eventContainer.querySelector('.event-info'), eventObject);
   }
