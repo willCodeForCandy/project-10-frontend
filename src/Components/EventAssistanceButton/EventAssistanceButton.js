@@ -17,14 +17,12 @@ export const EventAssistanceButton = (buttonContainer, eventObject) => {
       joinEventButton.textContent = 'Darme de baja';
       joinEventButton.classList.add('negative');
       joinEventButton.addEventListener('click', e => {
-        // leaveEvent(e, eventId);
         handleEventAssistance({ e, eventId, userIsGoing });
       });
     } else {
       //Si no está anotado, click en el botón para informar su asistencia
       joinEventButton.textContent = 'Unirme';
       joinEventButton.addEventListener('click', e => {
-        // joinEvent(e, eventId, user._id);
         handleEventAssistance({ e, eventId, userId: user._id });
       });
     }
