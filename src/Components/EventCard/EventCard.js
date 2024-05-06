@@ -1,5 +1,5 @@
 import { DeleteEventButton } from '../DeleteEventButton/DeleteEventButton';
-import { JoinEventButton } from '../JoinEventButton/JoinEventButton';
+import { JoinEventButton } from '../EventAssistanceButton/EventAssistanceButton';
 import './EventCard.css';
 
 export const EventCard = eventObject => {
