@@ -1,36 +1,30 @@
-import { vercelUrl } from '../../../main';
 import { createEventForm } from '../../Data/Forms';
-import { getBoardgames } from '../../Utils/getBoardgames';
 import { UserForm } from '../UserForm/UserForm';
 import './NewEventForm.css';
 import { showToast } from '../Toast/Toast';
 import { listOfEvents } from '../EventsSection/EventsSection';
 import { Modal } from '../Modal/Modal';
+import { apiRequest } from '../../Utils/apiRequest';
 
 const postEvent = async e => {
   e.preventDefault();
-  const token = localStorage.getItem('token');
-  const name = document.querySelector('#name').value;
-  const date = document.querySelector('#date').value;
-  const location = document.querySelector('#location').value;
+
   const gameName = document.querySelector('#game').value;
   const dataList = document.querySelector('#list-of-games');
-  const gameId = dataList
-    .querySelector(`[value="${gameName}"]`)
-    .getAttribute('data-id');
 
-  const res = await fetch(vercelUrl + '/events/', {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    },
+  const body = {
+    name: document.querySelector('#name').value,
+    date: document.querySelector('#date').value,
+    location: document.querySelector('#location').value,
+    game: dataList
+      .querySelector(`[value="${gameName}"]`)
+      .getAttribute('data-id'),
+  };
+
+  const res = await apiRequest({
+    endpoint: 'events',
     method: 'POST',
-    body: JSON.stringify({
-      name,
-      date,
-      location,
-      game: gameId,
-    }),
+    body,
   });
 
   const response = await res.json();
@@ -72,14 +66,16 @@ export const NewEventForm = () => {
     .insertAdjacentElement('beforebegin', gameInputContainer);
 
   const datalistOfGames = document.querySelector('#list-of-games');
-  getBoardgames().then(listOfGames => {
-    for (const game of listOfGames) {
-      const option = document.createElement('option');
-      option.value = game.title;
-      option.setAttribute('data-id', game._id);
-      datalistOfGames.append(option);
-    }
-  });
+  apiRequest({ method: 'get', endpoint: 'boardgames' })
+    .then(res => res.json())
+    .then(listOfGames => {
+      for (const game of listOfGames) {
+        const option = document.createElement('option');
+        option.value = game.title;
+        option.setAttribute('data-id', game._id);
+        datalistOfGames.append(option);
+      }
+    });
   document
     .querySelector('#create-event form')
     .addEventListener('submit', postEvent);

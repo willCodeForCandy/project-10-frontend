@@ -1,9 +1,9 @@
-import { vercelUrl } from '../../../main';
 import { UserForm } from '../../Components/UserForm/UserForm';
 import { registerForm } from '../../Data/Forms';
 import { Login, loginRequest } from '../Login/Login';
 import './Register.css';
 import { showToast } from '../../Components/Toast/Toast';
+import { mainRoute } from '../../Data/mainRoutes';
 
 const registerLayout = () => {
   const main = document.querySelector('main');
@@ -30,7 +30,7 @@ const registerSubmit = async e => {
   const password = document.querySelector('#password').value;
   const email = document.querySelector('#email').value;
   //Los envio a la BBDD con un post request
-  const response = await fetch(vercelUrl + '/users/register', {
+  const response = await fetch(mainRoute + '/users/register', {
     headers: {
       'Content-Type': 'application/json',
     },

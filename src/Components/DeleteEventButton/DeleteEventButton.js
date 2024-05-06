@@ -1,7 +1,7 @@
-import { vercelUrl } from '../../../main';
 import './DeleteEventButton.css';
 import { showToast } from '../Toast/Toast';
 import { Modal } from '../Modal/Modal';
+import { apiRequest } from '../../Utils/apiRequest';
 
 export const DeleteEventButton = (buttonContainer, eventObject) => {
   const user = JSON.parse(localStorage.getItem('user'));
@@ -30,14 +30,12 @@ export const DeleteEventButton = (buttonContainer, eventObject) => {
 
 /* Lógica para eliminar el evento */
 const deleteEvent = async (e, eventId) => {
-  const token = localStorage.getItem('token');
-  const res = await fetch(vercelUrl + '/events/' + eventId, {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    },
+  const res = await apiRequest({
+    endpoint: 'events',
+    id: eventId,
     method: 'DELETE',
   });
+
   const response = await res.json();
   //Si sale todo bien, se elimina la tarjeta y se muestra un mensaje
   if (res.status === 200) {

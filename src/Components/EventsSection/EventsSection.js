@@ -1,7 +1,7 @@
 import './EventsSection.css';
 import { dateComparator, sortByDate } from '../../Utils/dateComparator';
-import { getEvents } from '../../Utils/getEvents';
 import { EventCard } from '../EventCard/EventCard';
+import { apiRequest } from '../../Utils/apiRequest';
 
 export const EventsSection = ({ title, eventTiming }) => {
   const eventSection = document.createElement('section');
@@ -10,9 +10,7 @@ export const EventsSection = ({ title, eventTiming }) => {
   const eventDiv = document.createElement('div');
   eventsTitle.textContent = title;
   eventSection.append(eventsTitle);
-  // const loader = document.createElement('img');
-  // loader.src = './assets/Die_loader.gif';
-  // eventDiv.append(loader);
+
   eventDiv.innerHTML = ` 
   <dotlottie-player class="loader" src="https://lottie.host/b5ff9ff5-0262-45c7-b2d6-ba2a7e8487bc/d035grDmCh.json" speed="1" loop autoplay></dotlottie-player>`;
   eventSection.append(eventDiv);
@@ -21,7 +19,8 @@ export const EventsSection = ({ title, eventTiming }) => {
 };
 
 export const listOfEvents = async (parentNode, eventTiming) => {
-  const listOfEvents = await getEvents();
+  const res = await apiRequest({ method: 'get', endpoint: 'events' });
+  const listOfEvents = await res.json();
   parentNode.innerHTML = '';
   sortByDate(listOfEvents);
   for (let event of listOfEvents) {

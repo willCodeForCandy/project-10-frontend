@@ -1,6 +1,7 @@
-import { vercelUrl } from '../../../main';
 import './JoinEventButton.css';
 import { showToast } from '../Toast/Toast';
+import { mainRoute } from '../../Data/mainRoutes';
+import { apiRequest } from '../../Utils/apiRequest';
 
 export const JoinEventButton = (buttonContainer, eventObject) => {
   //Si el usuario está identificado, verá un botón para manejar su asistencia a eventos
@@ -32,17 +33,14 @@ export const JoinEventButton = (buttonContainer, eventObject) => {
 /* Lógica para sumarse al evento */
 const joinEvent = async (e, eventId, userId) => {
   e.target.classList.add('loading');
-  const token = localStorage.getItem('token');
-  const res = await fetch(vercelUrl + '/events/' + eventId, {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    },
+
+  const res = await apiRequest({
+    endpoint: 'events',
+    id: eventId,
     method: 'PUT',
-    body: JSON.stringify({
-      assistants: userId,
-    }),
+    body: { assistants: userId },
   });
+
   const response = await res.json();
   //Si sale todo bien, se actualiza el botón
   if (res.status === 200) {
@@ -59,7 +57,7 @@ const joinEvent = async (e, eventId, userId) => {
 const leaveEvent = async (e, eventId) => {
   e.target.classList.add('loading');
   const token = localStorage.getItem('token');
-  const res = await fetch(`${vercelUrl}/events/${eventId}/removeAssistant`, {
+  const res = await fetch(`${mainRoute}/events/${eventId}/removeAssistant`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

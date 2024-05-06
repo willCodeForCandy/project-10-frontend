@@ -1,8 +1,8 @@
-import { vercelUrl } from '../../../main';
 import { Header } from '../../Components/HeaderNav/HeaderNav';
 import { showToast } from '../../Components/Toast/Toast';
 import { UserForm } from '../../Components/UserForm/UserForm';
 import { loginForm } from '../../Data/Forms';
+import { mainRoute } from '../../Data/mainRoutes';
 import { Home } from '../Home/Home';
 import './Login.css';
 
@@ -31,7 +31,7 @@ export const Login = () => {
 };
 
 export const loginRequest = async (username, password) => {
-  const res = await fetch(vercelUrl + '/users/login', {
+  const res = await fetch(mainRoute + '/users/login', {
     headers: {
       'Content-Type': 'application/json',
     },
