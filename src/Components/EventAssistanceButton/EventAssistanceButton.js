@@ -1,6 +1,5 @@
 import './EventAssistanceButton.css';
 import { showToast } from '../Toast/Toast';
-import { mainRoute } from '../../Data/mainRoutes';
 import { apiRequest } from '../../Utils/apiRequest';
 
 export const EventAssistanceButton = (buttonContainer, eventObject) => {
