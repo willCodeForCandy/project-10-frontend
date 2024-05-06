@@ -34,26 +34,24 @@ export const EventAssistanceButton = (buttonContainer, eventObject) => {
 
 const handleEventAssistance = async ({ e, eventId, userId, userIsGoing }) => {
   e.target.classList.add('loading');
-  let res = {};
+  const requestObject = {
+    endpoint: 'events',
+    method: 'PUT',
+  };
   if (userIsGoing) {
-    //Si el usuario está anotado al evento, se lanza la petición para darlo de baja
-    res = await apiRequest({
-      endpoint: 'events',
-      id: `${eventId}/removeAssistant`,
-      method: 'PUT',
-    });
+    //Si el usuario está anotado al evento, uso el endpoint para darlo de baja
+    requestObject.id = `${eventId}/removeAssistant`;
   } else {
-    //Si el usuario NO está anotado al evento, se agrega
-    res = await apiRequest({
-      endpoint: 'events',
-      id: eventId,
-      method: 'PUT',
-      body: { assistants: userId },
-    });
+    //Si el usuario NO está anotado al evento, uso el endpoint general y paso los datos del asistente
+    requestObject.id = eventId;
+    requestObject.body = { assistants: userId };
   }
+  //En ambos casos, se hace la petición
+  const res = await apiRequest(requestObject);
   const response = await res.json();
-  //En ambos casos, si sale todo bien, se actualiza el botón
+
   if (res.status === 200) {
+    //Si sale todo bien, se actualiza el botón
     const { updatedEvent } = response;
     EventAssistanceButton(e.target.parentNode, updatedEvent);
     e.target.remove();
