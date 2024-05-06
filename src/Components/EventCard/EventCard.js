@@ -1,5 +1,5 @@
 import { DeleteEventButton } from '../DeleteEventButton/DeleteEventButton';
-import { JoinEventButton } from '../EventAssistanceButton/EventAssistanceButton';
+import { EventAssistanceButton } from '../EventAssistanceButton/EventAssistanceButton';
 import './EventCard.css';
 
 export const EventCard = eventObject => {
@@ -24,7 +24,10 @@ export const EventCard = eventObject => {
     DeleteEventButton(eventContainer, eventObject);
   }
   if (eventObject.isUpcoming) {
-    JoinEventButton(eventContainer.querySelector('.event-info'), eventObject);
+    EventAssistanceButton(
+      eventContainer.querySelector('.event-info'),
+      eventObject
+    );
   }
   return eventContainer;
 };

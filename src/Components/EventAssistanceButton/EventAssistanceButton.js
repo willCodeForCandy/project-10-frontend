@@ -3,7 +3,7 @@ import { showToast } from '../Toast/Toast';
 import { mainRoute } from '../../Data/mainRoutes';
 import { apiRequest } from '../../Utils/apiRequest';
 
-export const JoinEventButton = (buttonContainer, eventObject) => {
+export const EventAssistanceButton = (buttonContainer, eventObject) => {
   //Si el usuario está identificado, verá un botón para manejar su asistencia a eventos
   if (localStorage.getItem('token')) {
     const user = JSON.parse(localStorage.getItem('user'));
@@ -17,54 +17,48 @@ export const JoinEventButton = (buttonContainer, eventObject) => {
       joinEventButton.textContent = 'Darme de baja';
       joinEventButton.classList.add('negative');
       joinEventButton.addEventListener('click', e => {
-        leaveEvent(e, eventId);
+        // leaveEvent(e, eventId);
+        handleEventAssistance({ e, eventId, userIsGoing });
       });
     } else {
       //Si no está anotado, click en el botón para informar su asistencia
       joinEventButton.textContent = 'Unirme';
       joinEventButton.addEventListener('click', e => {
-        joinEvent(e, eventId, user._id);
+        // joinEvent(e, eventId, user._id);
+        handleEventAssistance({ e, eventId, userId: user._id });
       });
     }
     buttonContainer.append(joinEventButton);
   }
 };
 
-/* Lógica para sumarse al evento */
-const joinEvent = async (e, eventId, userId) => {
+const handleEventAssistance = async ({ e, eventId, userId, userIsGoing }) => {
   e.target.classList.add('loading');
-
-  const res = await apiRequest({
-    endpoint: 'events',
-    id: eventId,
-    method: 'PUT',
-    body: { assistants: userId },
-  });
-
+  let res = {};
+  if (userIsGoing) {
+    //Si el usuario está anotado al evento, se lanza la petición para darlo de baja
+    res = await apiRequest({
+      endpoint: 'events',
+      id: `${eventId}/removeAssistant`,
+      method: 'PUT',
+    });
+  } else {
+    //Si el usuario NO está anotado al evento, se agrega
+    res = await apiRequest({
+      endpoint: 'events',
+      id: eventId,
+      method: 'PUT',
+      body: { assistants: userId },
+    });
+  }
   const response = await res.json();
-  //Si sale todo bien, se actualiza el botón
+  //En ambos casos, si sale todo bien, se actualiza el botón
   if (res.status === 200) {
     const { updatedEvent } = response;
-    JoinEventButton(e.target.parentNode, updatedEvent);
+    EventAssistanceButton(e.target.parentNode, updatedEvent);
     e.target.remove();
   } else {
     //Si no, se informa al usuario del error
     showToast(response, 'red');
   }
-};
-
-/* Lógica para bajarse del evento */
-const leaveEvent = async (e, eventId) => {
-  e.target.classList.add('loading');
-  const token = localStorage.getItem('token');
-  const res = await fetch(`${mainRoute}/events/${eventId}/removeAssistant`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-    method: 'PUT',
-  });
-  const response = await res.json();
-  const { updatedEvent } = response;
-  JoinEventButton(e.target.parentNode, updatedEvent);
-  e.target.remove();
 };
