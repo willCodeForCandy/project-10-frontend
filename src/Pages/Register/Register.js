@@ -3,7 +3,7 @@ import { registerForm } from '../../Data/Forms';
 import { Login, loginRequest } from '../Login/Login';
 import './Register.css';
 import { showToast } from '../../Components/Toast/Toast';
-import { mainRoute } from '../../Data/mainRoutes';
+import { apiRequest } from '../../Utils/apiRequest';
 
 const registerLayout = () => {
   const main = document.querySelector('main');
@@ -30,17 +30,12 @@ const registerSubmit = async e => {
   const password = document.querySelector('#password').value;
   const email = document.querySelector('#email').value;
   //Los envio a la BBDD con un post request
-  const response = await fetch(mainRoute + '/users/register', {
-    headers: {
-      'Content-Type': 'application/json',
-    },
+  const response = await apiRequest({
+    endpoint: 'users/register',
     method: 'POST',
-    body: JSON.stringify({
-      username,
-      email,
-      password,
-    }),
+    body: { username, email, password },
   });
+
   //Recojo la respuesta
   const data = await response.json();
   //Si hay algun error, lo muestro al usuario

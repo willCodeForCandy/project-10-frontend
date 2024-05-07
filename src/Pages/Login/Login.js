@@ -2,7 +2,7 @@ import { Header } from '../../Components/HeaderNav/HeaderNav';
 import { showToast } from '../../Components/Toast/Toast';
 import { UserForm } from '../../Components/UserForm/UserForm';
 import { loginForm } from '../../Data/Forms';
-import { mainRoute } from '../../Data/mainRoutes';
+import { apiRequest } from '../../Utils/apiRequest';
 import { Home } from '../Home/Home';
 import './Login.css';
 
@@ -31,16 +31,12 @@ export const Login = () => {
 };
 
 export const loginRequest = async (username, password) => {
-  const res = await fetch(mainRoute + '/users/login', {
-    headers: {
-      'Content-Type': 'application/json',
-    },
+  const res = await apiRequest({
+    endpoint: 'users/login',
     method: 'POST',
-    body: JSON.stringify({
-      username,
-      password,
-    }),
+    body: { username, password },
   });
+
   if (res.status === 200) {
     const response = await res.json();
     localStorage.setItem('token', response.token);
