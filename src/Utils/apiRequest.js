@@ -8,11 +8,9 @@ export const apiRequest = async ({ endpoint, id = '', method, body }) => {
       Authorization: token ? `Bearer ${token}` : null,
     },
     method: method.toUpperCase(),
+    body: JSON.stringify(body),
   };
-  if (body) {
-    options['body'] = JSON.stringify(body);
-  }
-  //   console.log(token, options);
+
   const res = await fetch(`${mainRoute}/${endpoint}/${id}`, options);
   return res;
 };

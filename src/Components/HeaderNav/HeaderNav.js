@@ -2,6 +2,7 @@ import { Events } from '../../Pages/Events/Events';
 import { Home } from '../../Pages/Home/Home';
 import { Login } from '../../Pages/Login/Login';
 import { Register } from '../../Pages/Register/Register';
+import { profileIcon } from '../ProfileIcon/ProfileIcon';
 import './HeaderNav.css';
 
 const navLayout = () => `
@@ -11,7 +12,11 @@ const navLayout = () => `
   </li>
   <li id="log-link">
 
-      ${localStorage.getItem('token') ? 'Logout' : 'Identificarse'}
+      ${
+        localStorage.getItem('token')
+          ? profileIcon(JSON.parse(localStorage.getItem('user')).profilePic)
+          : 'Identificarse'
+      }
 
   </li>
 </ul>`;
